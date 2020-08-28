@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xzxy.lewy.dscross.mapper.TbDatasourceMapper">
+  <resultMap id="BaseResultMap" type="cn.xzxy.lewy.dscross.pojo.TbDatasource">
+    <id column="datasource_id" jdbcType="VARCHAR" property="datasourceId" />
+    <result column="datasource_name" jdbcType="VARCHAR" property="datasourceName" />
+    <result column="datasource_scope" jdbcType="INTEGER" property="datasourceScope" />
+    <result column="datasource_desc" jdbcType="VARCHAR" property="datasourceDesc" />
+    <result column="datasource_type" jdbcType="VARCHAR" property="datasourceType" />
+    <result column="database_label" jdbcType="VARCHAR" property="databaseLabel" />
+    <result column="database_ip" jdbcType="VARCHAR" property="databaseIp" />
+    <result column="database_port" jdbcType="VARCHAR" property="databasePort" />
+    <result column="database_url" jdbcType="VARCHAR" property="databaseUrl" />
+    <result column="database_type" jdbcType="VARCHAR" property="databaseType" />
+    <result column="database_username" jdbcType="VARCHAR" property="databaseUsername" />
+    <result column="database_password" jdbcType="VARCHAR" property="databasePassword" />
+    <result column="presto_name" jdbcType="VARCHAR" property="prestoName" />
+    <result column="config_meta_flag" jdbcType="VARCHAR" property="configMetaFlag" />
+    <result column="meta_ds_id" jdbcType="VARCHAR" property="metaDsId" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    datasource_id, datasource_name, datasource_scope, datasource_desc, datasource_type, 
+    database_label, database_ip, database_port, database_url, database_type, database_username, 
+    database_password, presto_name, config_meta_flag, meta_ds_id, status, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_b_datasource
+    where datasource_id = #{datasourceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_b_datasource
+    where datasource_id = #{datasourceId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.xzxy.lewy.dscross.pojo.TbDatasource">
+    insert into t_b_datasource (datasource_id, datasource_name, datasource_scope, 
+      datasource_desc, datasource_type, database_label, 
+      database_ip, database_port, database_url, 
+      database_type, database_username, database_password, 
+      presto_name, config_meta_flag, meta_ds_id, 
+      status, create_time, update_time
+      )
+    values (#{datasourceId,jdbcType=VARCHAR}, #{datasourceName,jdbcType=VARCHAR}, #{datasourceScope,jdbcType=INTEGER}, 
+      #{datasourceDesc,jdbcType=VARCHAR}, #{datasourceType,jdbcType=VARCHAR}, #{databaseLabel,jdbcType=VARCHAR}, 
+      #{databaseIp,jdbcType=VARCHAR}, #{databasePort,jdbcType=VARCHAR}, #{databaseUrl,jdbcType=VARCHAR}, 
+      #{databaseType,jdbcType=VARCHAR}, #{databaseUsername,jdbcType=VARCHAR}, #{databasePassword,jdbcType=VARCHAR}, 
+      #{prestoName,jdbcType=VARCHAR}, #{configMetaFlag,jdbcType=VARCHAR}, #{metaDsId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.xzxy.lewy.dscross.pojo.TbDatasource">
+    insert into t_b_datasource
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="datasourceId != null">
+        datasource_id,
+      </if>
+      <if test="datasourceName != null">
+        datasource_name,
+      </if>
+      <if test="datasourceScope != null">
+        datasource_scope,
+      </if>
+      <if test="datasourceDesc != null">
+        datasource_desc,
+      </if>
+      <if test="datasourceType != null">
+        datasource_type,
+      </if>
+      <if test="databaseLabel != null">
+        database_label,
+      </if>
+      <if test="databaseIp != null">
+        database_ip,
+      </if>
+      <if test="databasePort != null">
+        database_port,
+      </if>
+      <if test="databaseUrl != null">
+        database_url,
+      </if>
+      <if test="databaseType != null">
+        database_type,
+      </if>
+      <if test="databaseUsername != null">
+        database_username,
+      </if>
+      <if test="databasePassword != null">
+        database_password,
+      </if>
+      <if test="prestoName != null">
+        presto_name,
+      </if>
+      <if test="configMetaFlag != null">
+        config_meta_flag,
+      </if>
+      <if test="metaDsId != null">
+        meta_ds_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="datasourceId != null">
+        #{datasourceId,jdbcType=VARCHAR},
+      </if>
+      <if test="datasourceName != null">
+        #{datasourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="datasourceScope != null">
+        #{datasourceScope,jdbcType=INTEGER},
+      </if>
+      <if test="datasourceDesc != null">
+        #{datasourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="datasourceType != null">
+        #{datasourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseLabel != null">
+        #{databaseLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseIp != null">
+        #{databaseIp,jdbcType=VARCHAR},
+      </if>
+      <if test="databasePort != null">
+        #{databasePort,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseUrl != null">
+        #{databaseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseType != null">
+        #{databaseType,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseUsername != null">
+        #{databaseUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="databasePassword != null">
+        #{databasePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="prestoName != null">
+        #{prestoName,jdbcType=VARCHAR},
+      </if>
+      <if test="configMetaFlag != null">
+        #{configMetaFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="metaDsId != null">
+        #{metaDsId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.xzxy.lewy.dscross.pojo.TbDatasource">
+    update t_b_datasource
+    <set>
+      <if test="datasourceName != null">
+        datasource_name = #{datasourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="datasourceScope != null">
+        datasource_scope = #{datasourceScope,jdbcType=INTEGER},
+      </if>
+      <if test="datasourceDesc != null">
+        datasource_desc = #{datasourceDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="datasourceType != null">
+        datasource_type = #{datasourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseLabel != null">
+        database_label = #{databaseLabel,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseIp != null">
+        database_ip = #{databaseIp,jdbcType=VARCHAR},
+      </if>
+      <if test="databasePort != null">
+        database_port = #{databasePort,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseUrl != null">
+        database_url = #{databaseUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseType != null">
+        database_type = #{databaseType,jdbcType=VARCHAR},
+      </if>
+      <if test="databaseUsername != null">
+        database_username = #{databaseUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="databasePassword != null">
+        database_password = #{databasePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="prestoName != null">
+        presto_name = #{prestoName,jdbcType=VARCHAR},
+      </if>
+      <if test="configMetaFlag != null">
+        config_meta_flag = #{configMetaFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="metaDsId != null">
+        meta_ds_id = #{metaDsId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where datasource_id = #{datasourceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.xzxy.lewy.dscross.pojo.TbDatasource">
+    update t_b_datasource
+    set datasource_name = #{datasourceName,jdbcType=VARCHAR},
+      datasource_scope = #{datasourceScope,jdbcType=INTEGER},
+      datasource_desc = #{datasourceDesc,jdbcType=VARCHAR},
+      datasource_type = #{datasourceType,jdbcType=VARCHAR},
+      database_label = #{databaseLabel,jdbcType=VARCHAR},
+      database_ip = #{databaseIp,jdbcType=VARCHAR},
+      database_port = #{databasePort,jdbcType=VARCHAR},
+      database_url = #{databaseUrl,jdbcType=VARCHAR},
+      database_type = #{databaseType,jdbcType=VARCHAR},
+      database_username = #{databaseUsername,jdbcType=VARCHAR},
+      database_password = #{databasePassword,jdbcType=VARCHAR},
+      presto_name = #{prestoName,jdbcType=VARCHAR},
+      config_meta_flag = #{configMetaFlag,jdbcType=VARCHAR},
+      meta_ds_id = #{metaDsId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where datasource_id = #{datasourceId,jdbcType=VARCHAR}
+  </update>
+</mapper>
