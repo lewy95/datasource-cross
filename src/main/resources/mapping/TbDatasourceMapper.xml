@@ -33,6 +33,11 @@
     from t_b_datasource
     where datasource_id = #{datasourceId,jdbcType=VARCHAR}
   </select>
+  <select id="selectAll" resultType="cn.xzxy.lewy.dscross.pojo.TbDatasource" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_b_datasource
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from t_b_datasource
     where datasource_id = #{datasourceId,jdbcType=VARCHAR}

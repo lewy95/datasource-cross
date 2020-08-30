@@ -2,6 +2,8 @@ package cn.xzxy.lewy.dscross.mapper;
 
 import cn.xzxy.lewy.dscross.pojo.TbDatasource;
 
+import java.util.List;
+
 public interface TbDatasourceMapper {
     int deleteByPrimaryKey(String datasourceId);
 
@@ -14,4 +16,6 @@ public interface TbDatasourceMapper {
     int updateByPrimaryKeySelective(TbDatasource record);
 
     int updateByPrimaryKey(TbDatasource record);
+
+    List<TbDatasource> selectAll();
 }
