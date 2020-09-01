@@ -26,14 +26,14 @@
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
         <!--生成映射文件存放位置 -->
-        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mapping.back" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
         <!--生成Dao类存放位置 -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="cn.xzxy.lewy.dscross.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
-        <table tableName="t_b_datasource" domainObjectName="TbDatasource"
+        <table tableName="t_b_country" domainObjectName="TbCountry"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

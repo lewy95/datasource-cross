@@ -1,6 +1,6 @@
 #数据库驱动包类路径
 dataBaseDriver:
-  driver1: oracle.jdbc.driver.OracleDriver
+  driver1: oracle.jdbc.OracleDriver
   driver2: com.microsoft.sqlserver.jdbc.SQLServerDriver
   driver3: com.mysql.cj.jdbc.Driver
   driver4: org.apache.hive.jdbc.HiveDriver

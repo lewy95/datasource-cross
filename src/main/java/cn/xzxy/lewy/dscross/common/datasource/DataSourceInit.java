@@ -17,6 +17,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 数据源初始化类
+ * @author lewy95
+ */
 @Component
 public class DataSourceInit {
 
@@ -28,8 +32,8 @@ public class DataSourceInit {
     private DynamicDataSource dynamicDataSource;
     @Resource
     private CustomConfig customConfig;
-    @Resource
-    DataSource prestoDataSource;
+    //@Resource
+    //DataSource prestoDataSource;
 
     @PostConstruct
     public void loadCustomDataSource() {
@@ -37,16 +41,16 @@ public class DataSourceInit {
         List<TbDatasource> datasourceList = datasourceMapper.selectAll();
         Map<Object, Object> targetDataSources = new HashMap<>();
         for (TbDatasource datasource : datasourceList) {
-            DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
+            DruidDataSource druidDataSource = DruidDataSourceBuilder.create().build();
             String driverClassName = customConfig.getDriver().get(datasource.getDatabaseType());
-            dataSource.setDriverClassName(driverClassName);
+            druidDataSource.setDriverClassName(driverClassName);
             if (StringUtils.isNotBlank(datasource.getDatabaseUrl())) {
-                dataSource.setUrl(datasource.getDatabaseUrl());
+                druidDataSource.setUrl(datasource.getDatabaseUrl());
             } else {
-                dataSource.setUrl(String.format(datasource.getDatabaseUrl(), datasource.getDatabaseIp(), datasource.getDatabasePort(), datasource.getDatabaseLabel()));
+                druidDataSource.setUrl(String.format(datasource.getDatabaseUrl(), datasource.getDatabaseIp(), datasource.getDatabasePort(), datasource.getDatabaseLabel()));
             }
             //设置数据库类型
-            String jdbcType = JdbcConstants.ORACLE;
+            String jdbcType = JdbcConstants.MYSQL;
             if ("1".equals(datasource.getDatabaseType())) {
                 jdbcType = JdbcConstants.ORACLE;
             } else if ("2".equals(datasource.getDatabaseType())) {
@@ -56,9 +60,9 @@ public class DataSourceInit {
             } else if ("4".equals(datasource.getDatabaseType())) {
                 jdbcType = JdbcConstants.HIVE;
             }
-            dataSource.setDbType(jdbcType);
-            dataSource.setUsername(datasource.getDatasourceName());
-            dataSource.setPassword(datasource.getDatabasePassword());
+            druidDataSource.setDbType(jdbcType);
+            druidDataSource.setUsername(datasource.getDatabaseUsername());
+            druidDataSource.setPassword(datasource.getDatabasePassword());
             // 对库中密码进行解密，这里采用的国密4
 //            if (StringUtils.isNotBlank(datasource.getDatabasePassword())) {
 //                String[] pwdRes = SM4Utils.custParseEncryptHandler(datasource.getDatabasePassword());
@@ -69,11 +73,12 @@ public class DataSourceInit {
 //                    throw new BusinessException("初始化数据源连接异常");
 //                }
 //            }
-            DataSource ds = druidProperties.dataSource(dataSource);
+            DataSource ds = druidProperties.dataSource(druidDataSource);
+            // 以数据源ID作为Key来用于后期切换
             targetDataSources.put(datasource.getDatasourceId(), ds);
         }
         //将presto数据源加进去
-        targetDataSources.put(DataSourceType.PRESTO.name(), prestoDataSource);
+        //targetDataSources.put(DataSourceType.PRESTO.name(), prestoDataSource);
         dynamicDataSource.setTargetDataSources(targetDataSources);
         dynamicDataSource.afterPropertiesSet();
     }

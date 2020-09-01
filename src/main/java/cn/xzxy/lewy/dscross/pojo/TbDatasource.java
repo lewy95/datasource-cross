@@ -182,4 +182,28 @@ public class TbDatasource {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    @Override
+    public String toString() {
+        return "TbDatasource{" +
+                "datasourceId='" + datasourceId + '\'' +
+                ", datasourceName='" + datasourceName + '\'' +
+                ", datasourceScope=" + datasourceScope +
+                ", datasourceDesc='" + datasourceDesc + '\'' +
+                ", datasourceType='" + datasourceType + '\'' +
+                ", databaseLabel='" + databaseLabel + '\'' +
+                ", databaseIp='" + databaseIp + '\'' +
+                ", databasePort='" + databasePort + '\'' +
+                ", databaseUrl='" + databaseUrl + '\'' +
+                ", databaseType='" + databaseType + '\'' +
+                ", databaseUsername='" + databaseUsername + '\'' +
+                ", databasePassword='" + databasePassword + '\'' +
+                ", prestoName='" + prestoName + '\'' +
+                ", configMetaFlag='" + configMetaFlag + '\'' +
+                ", metaDsId='" + metaDsId + '\'' +
+                ", status=" + status +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

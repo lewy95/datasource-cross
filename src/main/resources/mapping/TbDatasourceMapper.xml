@@ -251,4 +251,11 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where datasource_id = #{datasourceId,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectBySql" resultType="map" parameterType="string">
+    ${sql}
+  </select>
+  <select id="executeBySql" resultType="integer" parameterType="string">
+    ${sql}
+  </select>
 </mapper>
