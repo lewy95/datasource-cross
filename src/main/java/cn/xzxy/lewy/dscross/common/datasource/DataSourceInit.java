@@ -1,9 +1,11 @@
 package cn.xzxy.lewy.dscross.common.datasource;
 
+import cn.xzxy.lewy.dscross.common.exception.BusinessException;
 import cn.xzxy.lewy.dscross.config.CustomConfig;
 import cn.xzxy.lewy.dscross.config.DruidProperties;
 import cn.xzxy.lewy.dscross.mapper.TbDatasourceMapper;
 import cn.xzxy.lewy.dscross.pojo.TbDatasource;
+import cn.xzxy.lewy.dscross.util.encrypt.SM4Utils;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.util.JdbcConstants;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,7 +71,7 @@ public class DataSourceInit {
 //                String[] pwdRes = SM4Utils.custParseEncryptHandler(datasource.getDatabasePassword());
 //                try {
 //                    String realPwd = SM4Utils.strDecode(pwdRes[0], pwdRes[1]);
-//                    dataSource.setPassword(realPwd);
+//                    druidDataSource.setPassword(realPwd);
 //                } catch (IOException e) {
 //                    throw new BusinessException("初始化数据源连接异常");
 //                }
