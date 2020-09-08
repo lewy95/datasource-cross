@@ -12,6 +12,11 @@ public enum DataSourceType
     MASTER,
 
     /**
+     * 从库1，测试分库分库，读写分离
+     */
+    SHARDING_1,
+
+    /**
      * presto
      */
     PRESTO,

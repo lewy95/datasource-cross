@@ -11,6 +11,11 @@ public interface CommonService {
     /**
      * 从presto中查询
      */
+    public List<Map> selectBySharding1(String sql);
+
+    /**
+     * 从presto中查询
+     */
     public List<Map> selectByPresto(String sql);
 
     /**

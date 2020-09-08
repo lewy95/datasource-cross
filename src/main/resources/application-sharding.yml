@@ -1,0 +1,48 @@
+sharding:
+  jdbc:
+    datasource:
+      # names: master, sharding1, sharding2, ....
+      names: master
+      master:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/dscross?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+      # 分库分表
+      #sharding1:
+      #  type: com.alibaba.druid.pool.DruidDataSource
+      #  driverClassName: com.mysql.cj.jdbc.Driver
+      #  url: jdbc:mysql://localhost:3306/dscross_sharding?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      #  username: root
+      #  password: 123456
+      #sharding2:
+      #  type: com.alibaba.druid.pool.DruidDataSource
+      #  driverClassName: com.mysql.cj.jdbc.Driver
+      #  url: jdbc:mysql://localhost:3306/dscross_sharding2?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      #  username: root
+      #  password: 123456
+      props:
+        sql: # 开启SQL显示，默认值: false，注意：仅配置读写分离时不会打印日志！！！
+          show: true
+
+    # 案例一：分表不分库/无读写分离，准备工作（主库两个表 t_t_sharding_1 和 t_t_sharding_2）
+    config:
+      sharding:
+        tables:
+          t_t_sharding:
+            # 指定所需分的表
+            actual-data-nodes: master.t_t_sharding_$->{0..1}
+            table-strategy:
+              inline:
+                # 分表规则指定字段
+                sharding-column: id
+                # 分表规则为手机号码除以2取模
+                algorithm-expression: t_t_sharding_$->{id % 2}
+
+#sharding.jdbc.config.sharding.tables.user.actual-data-nodes: ds_0.user_$->{0..3}
+#sharding.jdbc.config.sharding.tables.user.table-strategy.standard.sharding-column: id
+#sharding.jdbc.config.sharding.tables.user.table-strategy.standard.precise-algorithm-class-name: com.forezp.sharedingjdbcmasterslavetables.MyPreciseShardingAlgorithm
+#
+#sharding.jdbc.config.sharding.master-slave-rules.ds_0.master-data-source-name: db-test0
+#sharding.jdbc.config.sharding.master-slave-rules.ds_0.slave-data-source-names: db-test1,db-test2

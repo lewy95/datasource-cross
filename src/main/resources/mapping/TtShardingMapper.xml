@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xzxy.lewy.dscross.mapper.TtShardingMapper">
+    <resultMap id="BaseResultMap" type="cn.xzxy.lewy.dscross.pojo.TtSharding">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="back_one" jdbcType="VARCHAR" property="backOne"/>
+        <result column="back_two" jdbcType="VARCHAR" property="backTwo"/>
+        <result column="back_three" jdbcType="VARCHAR" property="backThree"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, phone, back_one, back_two, back_three
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_t_sharding
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_t_sharding
+        order by phone
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_t_sharding
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="cn.xzxy.lewy.dscross.pojo.TtSharding">
+    insert into t_t_sharding (id, phone, back_one, 
+      back_two, back_three)
+    values (#{id,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{backOne,jdbcType=VARCHAR}, 
+      #{backTwo,jdbcType=VARCHAR}, #{backThree,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="cn.xzxy.lewy.dscross.pojo.TtSharding">
+        insert into t_t_sharding
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="backOne != null">
+                back_one,
+            </if>
+            <if test="backTwo != null">
+                back_two,
+            </if>
+            <if test="backThree != null">
+                back_three,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="backOne != null">
+                #{backOne,jdbcType=VARCHAR},
+            </if>
+            <if test="backTwo != null">
+                #{backTwo,jdbcType=VARCHAR},
+            </if>
+            <if test="backThree != null">
+                #{backThree,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="false">
+      insert into t_t_sharding (id, phone, back_one,
+      back_two, back_three)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.id,jdbcType=INTEGER},
+            #{item.phone,jdbcType=VARCHAR},
+            #{item.backOne,jdbcType=VARCHAR},
+            #{item.backTwo,jdbcType=VARCHAR},
+            #{item.backThree,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.xzxy.lewy.dscross.pojo.TtSharding">
+        update t_t_sharding
+        <set>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="backOne != null">
+                back_one = #{backOne,jdbcType=VARCHAR},
+            </if>
+            <if test="backTwo != null">
+                back_two = #{backTwo,jdbcType=VARCHAR},
+            </if>
+            <if test="backThree != null">
+                back_three = #{backThree,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.xzxy.lewy.dscross.pojo.TtSharding">
+    update t_t_sharding
+    set phone = #{phone,jdbcType=VARCHAR},
+      back_one = #{backOne,jdbcType=VARCHAR},
+      back_two = #{backTwo,jdbcType=VARCHAR},
+      back_three = #{backThree,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

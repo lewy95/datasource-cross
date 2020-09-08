@@ -33,7 +33,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="cn.xzxy.lewy.dscross.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
-        <table tableName="t_b_country" domainObjectName="TbCountry"
+        <table tableName="t_t_sharding" domainObjectName="TtSharding"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
