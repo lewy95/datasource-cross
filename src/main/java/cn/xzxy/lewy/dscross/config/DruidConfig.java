@@ -38,17 +38,18 @@ public class DruidConfig {
     // 2. 添加bean
     // 3. 加入到targetDataSources中
 
-//    @Bean
-//    @ConfigurationProperties("spring.datasource.druid.presto")
-//    @ConditionalOnProperty(prefix = "spring.datasource.druid.presto", name = "enabled", havingValue = "true") // 只有true才开启
-//    public DataSource prestoDataSource(DruidProperties druidProperties) {
-//        DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
-//        return druidProperties.dataSource(dataSource);
-//    }
+    //@Bean
+    //@ConfigurationProperties("spring.datasource.druid.presto")
+    //@ConditionalOnProperty(prefix = "spring.datasource.druid.presto", name = "enabled", havingValue = "true") // 只有true才开启
+    //public DataSource prestoDataSource(DruidProperties druidProperties) {
+    //    DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
+    //    return druidProperties.dataSource(dataSource);
+    //}
 
     @Bean(name = "dynamicDataSource")
     @Primary
     public DynamicDataSource dataSource(DataSource masterDataSource) {
+                                        //DataSource prestoDataSource) {
         Map<Object, Object> targetDataSources = new HashMap<>();
         targetDataSources.put(DataSourceType.MASTER.name(), masterDataSource);
         //targetDataSources.put(DataSourceType.PRESTO.name(), prestoDataSource);
