@@ -9,9 +9,9 @@ import java.util.Map;
 public interface CommonService {
 
     /**
-     * 从presto中查询
+     * 从sakila中查询
      */
-    public List<Map> selectBySharding1(String sql);
+    public List<Map> selectBySakila(String sql);
 
     /**
      * 从presto中查询

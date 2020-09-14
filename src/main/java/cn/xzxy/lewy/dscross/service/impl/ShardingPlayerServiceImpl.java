@@ -3,7 +3,10 @@ package cn.xzxy.lewy.dscross.service.impl;
 import cn.xzxy.lewy.dscross.common.annotation.DataSource;
 import cn.xzxy.lewy.dscross.common.datasource.DataSourceType;
 import cn.xzxy.lewy.dscross.mapper.TtShardingMapper;
+import cn.xzxy.lewy.dscross.mapper.TtShardingPlayerMapper;
 import cn.xzxy.lewy.dscross.pojo.TtSharding;
+import cn.xzxy.lewy.dscross.pojo.TtShardingPlayer;
+import cn.xzxy.lewy.dscross.service.ShardingPlayerService;
 import cn.xzxy.lewy.dscross.service.ShardingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -16,26 +19,26 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class ShardingServiceImpl implements ShardingService {
+public class ShardingPlayerServiceImpl implements ShardingPlayerService {
 
     @Resource
-    private TtShardingMapper shardingMapper;
+    private TtShardingPlayerMapper shardingPlayerMapper;
 
     @Override
     @DataSource(DataSourceType.SHARDING)
-    public int insertBatch(List<TtSharding> shardingList) {
-        return shardingMapper.insertBatch(shardingList);
+    public int insertBatch(List<TtShardingPlayer> shardingList) {
+        return shardingPlayerMapper.insertBatch(shardingList);
     }
 
     @Override
     @DataSource(DataSourceType.SHARDING)
-    public int insert(TtSharding sharding) {
-        return shardingMapper.insert(sharding);
+    public int insert(TtShardingPlayer sharding) {
+        return shardingPlayerMapper.insert(sharding);
     }
 
     @Override
     @DataSource(DataSourceType.SHARDING)
-    public List<TtSharding> selectAll() {
-        return shardingMapper.selectAll();
+    public List<TtShardingPlayer> selectAll() {
+        return shardingPlayerMapper.selectAll();
     }
 }

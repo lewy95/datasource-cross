@@ -9,6 +9,8 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
   profiles:
     active: druid,sharding,custom
+  main:
+    allow-bean-definition-overriding: true
 
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml

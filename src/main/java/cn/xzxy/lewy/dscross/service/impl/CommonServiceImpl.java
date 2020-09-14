@@ -21,8 +21,8 @@ public class CommonServiceImpl implements CommonService {
     TbDatasourceMapper datasourceMapper;
 
     @Override
-    @DataSource(DataSourceType.SHARDING_1)
-    public List<Map> selectBySharding1(String sql) {
+    @DataSource(DataSourceType.SAKILA)
+    public List<Map> selectBySakila(String sql) {
         return datasourceMapper.selectBySql(sql);
     }
 

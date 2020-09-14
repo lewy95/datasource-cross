@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xzxy.lewy.dscross.mapper.TtShardingPlayerMapper">
+    <resultMap id="BaseResultMap" type="cn.xzxy.lewy.dscross.pojo.TtShardingPlayer">
+        <id column="player_id" jdbcType="VARCHAR" property="playerId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="number" jdbcType="INTEGER" property="number"/>
+        <result column="nation" jdbcType="VARCHAR" property="nation"/>
+        <result column="position" jdbcType="VARCHAR" property="position"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    player_id, name, age, number, nation, position
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_t_sharding_player
+        where player_id = #{playerId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_t_sharding_player
+        order by player_id
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from t_t_sharding_player
+    where player_id = #{playerId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="cn.xzxy.lewy.dscross.pojo.TtShardingPlayer">
+    insert into t_t_sharding_player (player_id, name, age, 
+      number, nation, position
+      )
+    values (#{playerId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{number,jdbcType=INTEGER}, #{nation,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="cn.xzxy.lewy.dscross.pojo.TtShardingPlayer">
+        insert into t_t_sharding_player
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="playerId != null">
+                player_id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="nation != null">
+                nation,
+            </if>
+            <if test="position != null">
+                position,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="playerId != null">
+                #{playerId,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=INTEGER},
+            </if>
+            <if test="nation != null">
+                #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="false">
+        insert into t_t_sharding_player (player_id, name, age,
+        number, nation, position
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.playerId,jdbcType=VARCHAR},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.age,jdbcType=INTEGER},
+            #{item.number,jdbcType=INTEGER},
+            #{item.nation,jdbcType=VARCHAR},
+            #{item.position,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="cn.xzxy.lewy.dscross.pojo.TtShardingPlayer">
+        update t_t_sharding_player
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=INTEGER},
+            </if>
+            <if test="nation != null">
+                nation = #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                position = #{position,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where player_id = #{playerId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.xzxy.lewy.dscross.pojo.TtShardingPlayer">
+    update t_t_sharding_player
+    set name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      number = #{number,jdbcType=INTEGER},
+      nation = #{nation,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR}
+    where player_id = #{playerId,jdbcType=VARCHAR}
+  </update>
+</mapper>

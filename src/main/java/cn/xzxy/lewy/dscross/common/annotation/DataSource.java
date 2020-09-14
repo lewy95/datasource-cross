@@ -9,12 +9,12 @@ import java.lang.annotation.Target;
 
 /**
  * 自定义多数据源切换注解
+ *
  * @author lewy95
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DataSource
-{
+public @interface DataSource {
     /**
      * 切换数据源名称
      */

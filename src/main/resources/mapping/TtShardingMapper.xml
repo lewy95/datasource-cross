@@ -71,8 +71,8 @@
         </trim>
     </insert>
     <insert id="insertBatch" parameterType="java.util.List" useGeneratedKeys="false">
-      insert into t_t_sharding (id, phone, back_one,
-      back_two, back_three)
+        insert into t_t_sharding (id, phone, back_one,
+        back_two, back_three)
         values
         <foreach collection="list" item="item" index="index" separator=",">
             (
