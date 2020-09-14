@@ -3,23 +3,19 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      # 一般用于配置动态数据源，区别于application-sharding.yml中配置的
-      # 即不需要分库分表的数据源，比如 Presto / Hive 数据源等
-      # 也可以在其中配置主库信息，但需要手动注入（一般用于不需要使用sharding-jdbc的场景，参考master分支中代码）
+      # ---------------- part1: 与主库有关，设计分库分表---------------
+      master:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/dscross?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+      sharding1:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/dscross_sharding?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
 
-      # 主库数据源（见下，一般不配）
-#      master:
-#        driverClassName: com.mysql.cj.jdbc.Driver
-#        url: jdbc:mysql://localhost:3306/dscross?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-#        username: root
-#        password: 123456
-#      sharding1:
-#        driverClassName: com.mysql.cj.jdbc.Driver
-#        url: jdbc:mysql://localhost:3306/dscross_sharding?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-#        username: root
-#        password: 123456
-
-      # 其他数据源
+      # ---------------- part2: 其他数据源，如 Presto / Hive 数据源等---------------
 #      presto:
 #        # 从数据源开关/默认关闭
 #        enabled: true
