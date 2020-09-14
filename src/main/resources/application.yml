@@ -8,7 +8,7 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   profiles:
-    active: druid,sharding,custom
+    active: druid,custom
   main:
     allow-bean-definition-overriding: true
 

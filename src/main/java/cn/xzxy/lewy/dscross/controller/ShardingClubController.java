@@ -1,10 +1,10 @@
 package cn.xzxy.lewy.dscross.controller;
 
 import cn.xzxy.lewy.dscross.common.model.JsonResponseEntity;
-import cn.xzxy.lewy.dscross.config.SnowflakeConfig;
 import cn.xzxy.lewy.dscross.pojo.TtShardingClub;
 import cn.xzxy.lewy.dscross.service.ShardingClubService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shardingsphere.core.strategy.keygen.SnowflakeShardingKeyGenerator;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,16 +25,16 @@ public class ShardingClubController {
     private ShardingClubService shardingClubService;
 
     @Resource
-    private SnowflakeConfig snowflakeConfig;
+    SnowflakeShardingKeyGenerator clubKeyGenerator;
 
     @PostMapping("/insertBatch")
     public JsonResponseEntity insertBatch() {
 
         List<TtShardingClub> shardingList = new ArrayList<>();
-        shardingList.add(new TtShardingClub("C" + snowflakeConfig.snowflakeId(), "Bayern Munchen", "GER", "MUNCHEN", 6));
-        shardingList.add(new TtShardingClub("C" + snowflakeConfig.snowflakeId(), "Livepool", "ENG", "LIVEPOOL", 6));
-        shardingList.add(new TtShardingClub("C" + snowflakeConfig.snowflakeId(), "Hamburger", "GER", "Hamburger", 1));
-        shardingList.add(new TtShardingClub("C" + snowflakeConfig.snowflakeId(), "AC Milan", "ITY", "MILAN", 7));
+        shardingList.add(new TtShardingClub("C" + clubKeyGenerator.generateKey(), "Bayern Munchen", "GER", "MUNCHEN", 6));
+        shardingList.add(new TtShardingClub("C" + clubKeyGenerator.generateKey(), "Livepool", "ENG", "LIVEPOOL", 6));
+        shardingList.add(new TtShardingClub("C" + clubKeyGenerator.generateKey(), "Hamburger", "GER", "Hamburger", 1));
+        shardingList.add(new TtShardingClub("C" + clubKeyGenerator.generateKey(), "AC Milan", "ITY", "MILAN", 7));
 
         return JsonResponseEntity.buildOK(shardingClubService.insertBatch(shardingList));
     }
@@ -42,7 +42,7 @@ public class ShardingClubController {
     @PostMapping("/insert")
     public JsonResponseEntity insert() {
 
-        TtShardingClub shardingClub = new TtShardingClub("C" + snowflakeConfig.snowflakeId(), "Dortmund", "GER", "Dortmund", 1);
+        TtShardingClub shardingClub = new TtShardingClub("C" + clubKeyGenerator.generateKey(), "Dortmund", "GER", "Dortmund", 1);
 
         return JsonResponseEntity.buildOK(shardingClubService.insert(shardingClub));
     }

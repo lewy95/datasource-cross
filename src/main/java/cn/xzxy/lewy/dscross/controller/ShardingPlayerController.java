@@ -1,12 +1,10 @@
 package cn.xzxy.lewy.dscross.controller;
 
-import cn.hutool.core.lang.Snowflake;
-import cn.hutool.core.util.IdUtil;
 import cn.xzxy.lewy.dscross.common.model.JsonResponseEntity;
-import cn.xzxy.lewy.dscross.config.SnowflakeConfig;
 import cn.xzxy.lewy.dscross.pojo.TtShardingPlayer;
 import cn.xzxy.lewy.dscross.service.ShardingPlayerService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shardingsphere.core.strategy.keygen.SnowflakeShardingKeyGenerator;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,18 +25,18 @@ public class ShardingPlayerController {
     private ShardingPlayerService shardingPlayerService;
 
     @Resource
-    private SnowflakeConfig snowflakeConfig;
+    SnowflakeShardingKeyGenerator playerKeyGenerator;
 
     @PostMapping("/insertBatch")
     public JsonResponseEntity insertBatch() {
 
         List<TtShardingPlayer> shardingList = new ArrayList<>();
 
-        shardingList.add(new TtShardingPlayer("P" + snowflakeConfig.snowflakeId(), "lewy", 32, 9, "POL", "ST"));
-        shardingList.add(new TtShardingPlayer("P" + snowflakeConfig.snowflakeId(), "muller", 31, 25, "GER", "CAM"));
-        shardingList.add(new TtShardingPlayer("P" + snowflakeConfig.snowflakeId(), "kimmich", 24, 32, "GER", "CDM"));
-        shardingList.add(new TtShardingPlayer("P" + snowflakeConfig.snowflakeId(), "gnabry", 24, 7, "GER", "RW"));
-        shardingList.add(new TtShardingPlayer("P" + snowflakeConfig.snowflakeId(), "leon", 24, 18, "GER", "CM"));
+        shardingList.add(new TtShardingPlayer("P" + playerKeyGenerator.generateKey(), "lewy", 32, 9, "POL", "ST"));
+        shardingList.add(new TtShardingPlayer("P" + playerKeyGenerator.generateKey(), "muller", 31, 25, "GER", "CAM"));
+        shardingList.add(new TtShardingPlayer("P" + playerKeyGenerator.generateKey(), "kimmich", 24, 32, "GER", "CDM"));
+        shardingList.add(new TtShardingPlayer("P" + playerKeyGenerator.generateKey(), "gnabry", 24, 7, "GER", "RW"));
+        shardingList.add(new TtShardingPlayer("P" + playerKeyGenerator.generateKey(), "leon", 24, 18, "GER", "CM"));
 
         return JsonResponseEntity.buildOK(shardingPlayerService.insertBatch(shardingList));
     }
@@ -46,7 +44,7 @@ public class ShardingPlayerController {
     @PostMapping("/insert")
     public JsonResponseEntity insert() {
 
-        TtShardingPlayer shardingPlayer = new TtShardingPlayer("P" + snowflakeConfig.snowflakeId(), "coman", 23, 29, "FRA", "LW");
+        TtShardingPlayer shardingPlayer = new TtShardingPlayer("P" + playerKeyGenerator.generateKey(), "coman", 23, 29, "FRA", "LW");
 
         return JsonResponseEntity.buildOK(shardingPlayerService.insert(shardingPlayer));
     }

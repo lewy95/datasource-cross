@@ -26,7 +26,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <hutool-all.version>5.4.1</hutool-all.version>
         <ojdbc6.version>11.2.0.3</ojdbc6.version>
-        <sharding-jdbc-starter.version>3.1.0</sharding-jdbc-starter.version>
+        <sharding-jdbc-starter.version>4.1.0</sharding-jdbc-starter.version>
     </properties>
 
     <dependencies>
@@ -64,8 +64,8 @@
 
         <!-- sharding-jdbc-core 分库分表 -->
         <dependency>
-            <groupId>io.shardingsphere</groupId>
-            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-core</artifactId>
             <version>${sharding-jdbc-starter.version}</version>
         </dependency>
 

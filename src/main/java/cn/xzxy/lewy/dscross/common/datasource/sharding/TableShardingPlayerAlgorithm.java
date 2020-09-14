@@ -1,8 +1,8 @@
 package cn.xzxy.lewy.dscross.common.datasource.sharding;
 
 import cn.hutool.core.util.HashUtil;
-import io.shardingsphere.api.algorithm.sharding.PreciseShardingValue;
-import io.shardingsphere.api.algorithm.sharding.standard.PreciseShardingAlgorithm;
+import org.apache.shardingsphere.api.sharding.standard.PreciseShardingAlgorithm;
+import org.apache.shardingsphere.api.sharding.standard.PreciseShardingValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
