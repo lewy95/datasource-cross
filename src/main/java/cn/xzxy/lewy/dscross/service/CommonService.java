@@ -9,6 +9,11 @@ import java.util.Map;
 public interface CommonService {
 
     /**
+     * 从sakila中查询
+     */
+    public List<Map> selectBySakila(String sql);
+
+    /**
      * 从presto中查询
      */
     public List<Map> selectByPresto(String sql);

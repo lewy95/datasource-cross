@@ -8,7 +8,9 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   profiles:
-    active: druid,custom
+    active: druid,sharding,custom
+  main:
+    allow-bean-definition-overriding: true
 
 mybatis:
   mapper-locations: classpath:mapping/*Mapper.xml

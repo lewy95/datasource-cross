@@ -2,6 +2,7 @@ package cn.xzxy.lewy.dscross.common.datasource;
 
 import cn.xzxy.lewy.dscross.common.exception.BusinessException;
 import cn.xzxy.lewy.dscross.config.CustomConfig;
+import cn.xzxy.lewy.dscross.config.DataSourceConfig;
 import cn.xzxy.lewy.dscross.config.DruidProperties;
 import cn.xzxy.lewy.dscross.mapper.TbDatasourceMapper;
 import cn.xzxy.lewy.dscross.pojo.TbDatasource;
@@ -22,6 +23,11 @@ import java.util.Map;
 
 /**
  * 数据源初始化类
+ * <br>
+ * 说明：
+ * 该类可有可无，其作用主要是支持从数据库中读取配置的数据源信息加载到动态数据源中。
+ * 后面可以用datasourceId切换。
+ *
  * @author lewy95
  */
 @Component
@@ -35,11 +41,18 @@ public class DataSourceInit {
     private DynamicDataSource dynamicDataSource;
     @Resource
     private CustomConfig customConfig;
-    //@Resource
-    //DataSource prestoDataSource;
+    @Resource
+    DataSource sakilaDataSource;
+    @Resource
+    DataSource masterDataSource;
+    @Resource
+    DataSource shardingOneDataSource;
+    @Resource
+    DataSourceConfig dataSourceConfig;
+
 
     @PostConstruct
-    public void loadCustomDataSource() {
+    public void loadCustomDataSource() throws Exception {
 
         List<TbDatasource> datasourceList = datasourceMapper.selectAll();
         Map<Object, Object> targetDataSources = new HashMap<>();
@@ -67,22 +80,31 @@ public class DataSourceInit {
             druidDataSource.setUsername(datasource.getDatabaseUsername());
             druidDataSource.setPassword(datasource.getDatabasePassword());
             // 对库中密码进行解密，这里采用的国密4
-//            if (StringUtils.isNotBlank(datasource.getDatabasePassword())) {
-//                String[] pwdRes = SM4Utils.custParseEncryptHandler(datasource.getDatabasePassword());
-//                try {
-//                    String realPwd = SM4Utils.strDecode(pwdRes[0], pwdRes[1]);
-//                    druidDataSource.setPassword(realPwd);
-//                } catch (IOException e) {
-//                    throw new BusinessException("初始化数据源连接异常");
-//                }
-//            }
+            //if (StringUtils.isNotBlank(datasource.getDatabasePassword())) {
+            //    passwordDecrypt(datasource.getDatabasePassword(), druidDataSource);
+            //}
             DataSource ds = druidProperties.dataSource(druidDataSource);
             // 以数据源ID作为Key来用于后期切换
             targetDataSources.put(datasource.getDatasourceId(), ds);
         }
         //将presto数据源加进去
         //targetDataSources.put(DataSourceType.PRESTO.name(), prestoDataSource);
+        targetDataSources.put(DataSourceType.SAKILA.name(), sakilaDataSource);
+        targetDataSources.put(DataSourceType.SHARDING.name(), dataSourceConfig.getShardingDataSource(masterDataSource, shardingOneDataSource));
         dynamicDataSource.setTargetDataSources(targetDataSources);
         dynamicDataSource.afterPropertiesSet();
+    }
+
+    /**
+     * 隐私字段解密
+     */
+    private void passwordDecrypt(String origins, DruidDataSource druidDataSource) {
+        String[] pwdRes = SM4Utils.custParseEncryptHandler(origins);
+        try {
+            String realPwd = SM4Utils.strDecode(pwdRes[0], pwdRes[1]);
+            druidDataSource.setPassword(realPwd);
+        } catch (IOException e) {
+            throw new BusinessException("初始化数据源连接异常");
+        }
     }
 }

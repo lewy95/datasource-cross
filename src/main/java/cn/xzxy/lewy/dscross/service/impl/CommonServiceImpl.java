@@ -21,6 +21,12 @@ public class CommonServiceImpl implements CommonService {
     TbDatasourceMapper datasourceMapper;
 
     @Override
+    @DataSource(DataSourceType.SAKILA)
+    public List<Map> selectBySakila(String sql) {
+        return datasourceMapper.selectBySql(sql);
+    }
+
+    @Override
     @DataSource(DataSourceType.PRESTO)
     public List<Map> selectByPresto(String sql) {
         return datasourceMapper.selectBySql(sql);
