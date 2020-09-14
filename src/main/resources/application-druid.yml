@@ -33,18 +33,7 @@ spring:
         url: jdbc:mysql://localhost:3306/sakila?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
         username: root
         password: 123456
-<<<<<<< HEAD
-      # 其他数据源
-      # presto:
-      #  # 从数据源开关/默认关闭
-      #  enabled: true
-      #  driverClassName: com.facebook.presto.jdbc.PrestoDriver
-      #  url: jdbc:presto://ipaddr:port/dbName
-      #  username:
-      #  password:
-=======
 
->>>>>>> feature
       # 初始连接数
       initialSize: 5
       # 最小连接池数量

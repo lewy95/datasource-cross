@@ -1,61 +1,22 @@
 package cn.xzxy.lewy.dscross.config;
 
-import cn.xzxy.lewy.dscross.common.datasource.DataSourceType;
-import cn.xzxy.lewy.dscross.common.datasource.DynamicDataSource;
-import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties;
 import com.alibaba.druid.util.Utils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
 import javax.servlet.*;
-import javax.sql.DataSource;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * druid 配置多数据源
  * druid 配置
+ *
  * @author lewy95
  */
 @Configuration
 public class DruidConfig {
-
-    @Bean
-    @ConfigurationProperties("spring.datasource.druid.master")
-    public DataSource masterDataSource(DruidProperties druidProperties) {
-        DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
-        return druidProperties.dataSource(dataSource);
-    }
-
-    // 从库配置参考 presto 的配置
-    // 1. yml中添加；
-    // 2. 添加bean
-    // 3. 加入到targetDataSources中
-
-    //@Bean
-    //@ConfigurationProperties("spring.datasource.druid.presto")
-    //@ConditionalOnProperty(prefix = "spring.datasource.druid.presto", name = "enabled", havingValue = "true") // 只有true才开启
-    //public DataSource prestoDataSource(DruidProperties druidProperties) {
-    //    DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
-    //    return druidProperties.dataSource(dataSource);
-    //}
-
-    @Bean(name = "dynamicDataSource")
-    @Primary
-    public DynamicDataSource dataSource(DataSource masterDataSource) {
-                                        //DataSource prestoDataSource) {
-        Map<Object, Object> targetDataSources = new HashMap<>();
-        targetDataSources.put(DataSourceType.MASTER.name(), masterDataSource);
-        //targetDataSources.put(DataSourceType.PRESTO.name(), prestoDataSource);
-        return new DynamicDataSource(masterDataSource, targetDataSources);
-    }
 
     /**
      * 去除监控页面底部的广告
