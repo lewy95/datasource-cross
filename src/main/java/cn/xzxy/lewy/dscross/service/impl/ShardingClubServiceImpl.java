@@ -38,4 +38,10 @@ public class ShardingClubServiceImpl implements ShardingClubService {
     public List<TtShardingClub> selectAll() {
         return shardingClubMapper.selectAll();
     }
+
+    @Override
+    @DataSource(DataSourceType.SHARDING)
+    public int insertUpdateBatch(List<TtShardingClub> shardingList) {
+        return shardingClubMapper.insertUpdateBatch(shardingList);
+    }
 }

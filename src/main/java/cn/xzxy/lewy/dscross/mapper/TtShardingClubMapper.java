@@ -22,4 +22,6 @@ public interface TtShardingClubMapper {
     int insertBatch(@Param("list") List<TtShardingClub> shardingList);
 
     List<TtShardingClub> selectAll();
+
+    int insertUpdateBatch(@Param("list")List<TtShardingClub> shardingList);
 }

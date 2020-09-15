@@ -14,4 +14,6 @@ public interface ShardingClubService {
     int insert(TtShardingClub sharding);
 
     List<TtShardingClub> selectAll();
+
+    int insertUpdateBatch(List<TtShardingClub> shardingList);
 }

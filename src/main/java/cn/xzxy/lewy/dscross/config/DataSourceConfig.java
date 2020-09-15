@@ -2,12 +2,14 @@ package cn.xzxy.lewy.dscross.config;
 
 import cn.xzxy.lewy.dscross.common.datasource.DataSourceType;
 import cn.xzxy.lewy.dscross.common.datasource.DynamicDataSource;
+import cn.xzxy.lewy.dscross.common.datasource.sharding.ComplexTableShardingClubAlgorithm;
 import cn.xzxy.lewy.dscross.common.datasource.sharding.TableShardingClubAlgorithm;
 import cn.xzxy.lewy.dscross.common.datasource.sharding.TableShardingPlayerAlgorithm;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import org.apache.shardingsphere.api.config.sharding.ShardingRuleConfiguration;
 import org.apache.shardingsphere.api.config.sharding.TableRuleConfiguration;
+import org.apache.shardingsphere.api.config.sharding.strategy.ComplexShardingStrategyConfiguration;
 import org.apache.shardingsphere.api.config.sharding.strategy.StandardShardingStrategyConfiguration;
 import org.apache.shardingsphere.shardingjdbc.api.ShardingDataSourceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -149,7 +152,9 @@ public class DataSourceConfig {
         // 指定分库规则
         //result.setDatabaseShardingStrategyConfig(new StandardShardingStrategyConfiguration("phone", new DataSourceAlg()));
         // 指定分表规则
-        result.setTableShardingStrategyConfig(new StandardShardingStrategyConfiguration("club_id", new TableShardingClubAlgorithm()));
+        //result.setTableShardingStrategyConfig(new StandardShardingStrategyConfiguration("club_id", new TableShardingClubAlgorithm()));
+        // 测试自定义复合分片规则（多个字段用逗号分隔）
+        result.setTableShardingStrategyConfig(new ComplexShardingStrategyConfiguration("name,nation", new ComplexTableShardingClubAlgorithm()));
         return result;
     }
 

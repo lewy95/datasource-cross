@@ -47,6 +47,23 @@
             )
         </foreach>
     </insert>
+    <insert id="insertUpdateBatch" parameterType="java.util.List" useGeneratedKeys="false">
+        insert into t_t_sharding_club (club_id, name, nation,
+        city, champion_time)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+            #{item.clubId,jdbcType=VARCHAR},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.nation,jdbcType=VARCHAR},
+            #{item.city,jdbcType=VARCHAR},
+            #{item.championTime,jdbcType=INTEGER}
+            )
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        city = VALUES(city),
+        champion_time = VALUES(champion_time)
+    </insert>
     <insert id="insertSelective" parameterType="cn.xzxy.lewy.dscross.pojo.TtShardingClub">
         insert into t_t_sharding_club
         <trim prefix="(" suffix=")" suffixOverrides=",">

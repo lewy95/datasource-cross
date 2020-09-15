@@ -32,11 +32,27 @@ public class ShardingClubController {
 
         List<TtShardingClub> shardingList = new ArrayList<>();
         shardingList.add(new TtShardingClub("C" + clubKeyGenerator.generateKey(), "Bayern Munchen", "GER", "MUNCHEN", 6));
-        shardingList.add(new TtShardingClub("C" + clubKeyGenerator.generateKey(), "Livepool", "ENG", "LIVEPOOL", 6));
+        shardingList.add(new TtShardingClub("C" + clubKeyGenerator.generateKey(), "Liverpool", "ENG", "LIVERPOOL", 6));
         shardingList.add(new TtShardingClub("C" + clubKeyGenerator.generateKey(), "Hamburger", "GER", "Hamburger", 1));
         shardingList.add(new TtShardingClub("C" + clubKeyGenerator.generateKey(), "AC Milan", "ITY", "MILAN", 7));
 
         return JsonResponseEntity.buildOK(shardingClubService.insertBatch(shardingList));
+    }
+
+    /**
+     * insert into on duplicate key
+     * 注意：update后更新字段不能包括sharing-jdbc的分片键
+     */
+    @PostMapping("/insertUpdateBatch")
+    public JsonResponseEntity insertDuplicateBatch() {
+
+        List<TtShardingClub> shardingList = new ArrayList<>();
+        shardingList.add(new TtShardingClub("C1", "Bayern Munchen", "GER", "MUNCHEN", 6));
+        shardingList.add(new TtShardingClub("C2", "Liverpool", "ENG", "LIVERPOOL", 6));
+        shardingList.add(new TtShardingClub("C3", "Hamburger", "GER", "Hamburger", 1));
+        shardingList.add(new TtShardingClub("C4", "AC Milan", "ITY", "MILAN", 7));
+
+        return JsonResponseEntity.buildOK(shardingClubService.insertUpdateBatch(shardingList));
     }
 
     @PostMapping("/insert")

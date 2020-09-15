@@ -11,7 +11,7 @@
  Target Server Version : 50727
  File Encoding         : 65001
 
- Date: 14/09/2020 14:48:42
+ Date: 15/09/2020 16:10:38
 */
 
 SET NAMES utf8mb4;
@@ -92,8 +92,7 @@ CREATE TABLE "t_t_sharding_club_0" (
   "nation" varchar(50) DEFAULT NULL COMMENT '所在国家',
   "city" varchar(50) DEFAULT NULL COMMENT '所在城市',
   "champion_time" int(10) DEFAULT NULL COMMENT '夺冠次数',
-  PRIMARY KEY ("club_id") USING BTREE,
-  KEY "phoneIndex" ("name") USING BTREE
+  PRIMARY KEY ("club_id") USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='表2';
 
 -- ----------------------------
@@ -106,8 +105,7 @@ CREATE TABLE "t_t_sharding_club_1" (
   "nation" varchar(50) DEFAULT NULL COMMENT '所在国家',
   "city" varchar(50) DEFAULT NULL COMMENT '所在城市',
   "champion_time" int(10) DEFAULT NULL COMMENT '夺冠次数',
-  PRIMARY KEY ("club_id") USING BTREE,
-  KEY "phoneIndex" ("name") USING BTREE
+  PRIMARY KEY ("club_id") USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='表2';
 
 -- ----------------------------
@@ -121,8 +119,7 @@ CREATE TABLE "t_t_sharding_player_0" (
   "number" int(5) DEFAULT NULL COMMENT '号码',
   "nation" varchar(50) DEFAULT NULL COMMENT '国籍',
   "position" varchar(20) DEFAULT NULL COMMENT '位置',
-  PRIMARY KEY ("player_id") USING BTREE,
-  KEY "phoneIndex" ("age") USING BTREE
+  PRIMARY KEY ("player_id") USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='表2';
 
 -- ----------------------------
@@ -136,8 +133,7 @@ CREATE TABLE "t_t_sharding_player_1" (
   "number" int(5) DEFAULT NULL COMMENT '号码',
   "nation" varchar(50) DEFAULT NULL COMMENT '国籍',
   "position" varchar(20) DEFAULT NULL COMMENT '位置',
-  PRIMARY KEY ("player_id") USING BTREE,
-  KEY "phoneIndex" ("age") USING BTREE
+  PRIMARY KEY ("player_id") USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='表2';
 
 SET FOREIGN_KEY_CHECKS = 1;
