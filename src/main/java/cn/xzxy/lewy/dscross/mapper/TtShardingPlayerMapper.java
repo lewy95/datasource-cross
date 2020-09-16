@@ -1,5 +1,6 @@
 package cn.xzxy.lewy.dscross.mapper;
 
+import cn.xzxy.lewy.dscross.dto.PlayerListReq;
 import cn.xzxy.lewy.dscross.pojo.TtShardingPlayer;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,4 +22,6 @@ public interface TtShardingPlayerMapper {
     int insertBatch(@Param("list") List<TtShardingPlayer> shardingList);
 
     List<TtShardingPlayer> selectAll();
+
+    List<TtShardingPlayer> selectAllByParam(@Param("record") PlayerListReq req);
 }

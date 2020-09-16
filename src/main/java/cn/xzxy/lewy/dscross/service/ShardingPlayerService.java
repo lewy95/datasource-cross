@@ -1,5 +1,6 @@
 package cn.xzxy.lewy.dscross.service;
 
+import cn.xzxy.lewy.dscross.dto.PlayerListReq;
 import cn.xzxy.lewy.dscross.pojo.TtShardingPlayer;
 
 import java.util.List;
@@ -14,4 +15,8 @@ public interface ShardingPlayerService {
     int insert(TtShardingPlayer sharding);
 
     List<TtShardingPlayer> selectAll();
+
+    List<TtShardingPlayer> selectAllByParam(PlayerListReq playerListReq);
+
+    TtShardingPlayer selectPlayerById(String playerId);
 }

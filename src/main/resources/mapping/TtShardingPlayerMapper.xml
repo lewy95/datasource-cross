@@ -24,6 +24,23 @@
         from t_t_sharding_player
         order by player_id
     </select>
+    <select id="selectAllByParam" parameterType="cn.xzxy.lewy.dscross.dto.PlayerListReq" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_t_sharding_player
+        <where>
+            <if test="record.playerName != null and record.playerName != ''">
+                name like concat("%", #{record.playerName,jdbcType=VARCHAR}, "%")
+            </if>
+            <if test="record.nation != null and record.nation != ''">
+                and nation = #{record.nation,jdbcType=VARCHAR}
+            </if>
+            <if test="record.position != null and record.position != ''">
+                and position = #{record.position,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by player_id
+    </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from t_t_sharding_player
     where player_id = #{playerId,jdbcType=VARCHAR}
